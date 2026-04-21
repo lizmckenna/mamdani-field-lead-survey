@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mamdani Field Lead Survey — Preliminary Findings</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f4ede0;
+    --paper-deep: #ebdfc8;
+    --ink: #1a1a1a;
+    --blue: #2818d3;
+    --yellow: #fea806;
+    --red: #e81602;
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+
+  /* ===== Poster-style nav ===== */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink); color: var(--paper);
+    border-bottom: 3px solid var(--yellow);
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: auto 1fr auto; align-items: stretch; gap: 24px;
+    min-height: 78px;
+  }
+  .nav-mark {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 12px 0;
+  }
+  .nav-mark-kicker {
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 2px;
+    color: var(--yellow); text-transform: uppercase;
+  }
+  .nav-mark-title {
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 22px;
+    letter-spacing: -0.5px; line-height: 1; margin-top: 4px;
+  }
+  .nav-mark-title em { color: var(--yellow); font-style: italic; font-weight: 700; }
+  .nav-tabs {
+    display: flex; align-items: stretch;
+  }
+  .nav-tab {
+    appearance: none; border: 0; background: transparent;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px;
+    letter-spacing: -0.3px; color: rgba(244,237,224,0.55);
+    padding: 0 22px; cursor: pointer; position: relative;
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    border-right: 1px solid rgba(244,237,224,0.1);
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-tab:first-child { border-left: 1px solid rgba(244,237,224,0.1); }
+  .nav-tab:hover { color: var(--paper); background: rgba(244,237,224,0.04); }
+  .nav-tab-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
+    color: rgba(244,237,224,0.4); text-transform: uppercase;
+  }
+  .nav-tab.active { color: var(--paper); background: var(--blue); }
+  .nav-tab.active .nav-tab-num { color: var(--yellow); }
+  .nav-tab.active::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px;
+    background: var(--yellow);
+  }
+  .nav-stamp {
+    display: flex; align-items: center; gap: 10px; padding: 12px 0;
+  }
+  .nav-stamp-chip {
+    background: var(--red); color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 10px; transform: rotate(-2deg);
+    border: 2px solid var(--paper);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+  }
+  .nav-stamp-meta {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    color: rgba(244,237,224,0.6); line-height: 1.4;
+  }
+  .nav-stamp-meta b { color: var(--yellow); font-weight: 600; }
+
+  /* ===== Tab panels ===== */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ===== Tab 2/3 container ===== */
+  .inner-panel {
+    max-width: 1280px; margin: 0 auto; padding: 40px 24px 80px;
+  }
+
+  /* artboard-scroll alias for old inner scroll refs */
+  .artboard-scroll { width: 100%; }
+
+  @media (max-width: 900px) {
+    .nav-inner { grid-template-columns: 1fr; min-height: auto; padding: 12px 16px; gap: 12px; }
+    .nav-tabs { overflow-x: auto; }
+    .nav-tab { padding: 10px 14px; font-size: 16px; }
+    .nav-stamp { justify-content: flex-start; padding: 0 0 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="src/util.jsx"></script>
+<script type="text/babel" src="src/view-a.jsx"></script>
+<script type="text/babel" src="src/view-b.jsx"></script>
+<script type="text/babel" src="src/view-c.jsx"></script>
+
+<script type="text/babel">
+const TABS = [
+  { id: 'findings',  num: '01', label: 'Findings',       sub: 'the nine takeaways' },
+  { id: 'explorer',  num: '02', label: 'Cohort Explorer', sub: 'filter the data' },
+  { id: 'atlas',     num: '03', label: 'Quote Atlas',     sub: 'in their words' },
+];
+
+function App({ data }) {
+  const [tab, setTab] = React.useState(() => {
+    try { return localStorage.getItem('mam-tab') || 'findings'; } catch(e) { return 'findings'; }
+  });
+  React.useEffect(() => {
+    try { localStorage.setItem('mam-tab', tab); } catch(e) {}
+    window.scrollTo(0, 0);
+  }, [tab]);
+
+  window.__RAW__ = data.raw;
+
+  return (
+    <div>
+      <nav className="nav" data-screen-label="Nav">
+        <div className="nav-inner">
+          <div className="nav-mark">
+            <span className="nav-mark-kicker">Field Lead Survey · Preliminary</span>
+            <span className="nav-mark-title">The field leads: <em>who they were</em>, and what the work did to them</span>
+          </div>
+
+          <div className="nav-tabs" role="tablist">
+            {TABS.map(t => (
+              <button
+                key={t.id}
+                className={'nav-tab ' + (tab === t.id ? 'active' : '')}
+                role="tab"
+                aria-selected={tab === t.id}
+                onClick={() => setTab(t.id)}
+              >
+                <span className="nav-tab-num">§ {t.num} — {t.sub}</span>
+                <span>{t.label}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="nav-stamp">
+            <div className="nav-stamp-chip">Preliminary</div>
+            <div className="nav-stamp-meta">
+              <b>n = 91</b> of ~700<br/>
+              fielded ~3 days
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className={'panel ' + (tab === 'findings' ? 'active' : '')} data-screen-label="01 Findings">
+        <ViewA data={data} />
+      </div>
+
+      <div className={'panel ' + (tab === 'explorer' ? 'active' : '')} data-screen-label="02 Cohort Explorer">
+        <div className="inner-panel">
+          <ViewB data={data} />
+        </div>
+      </div>
+
+      <div className={'panel ' + (tab === 'atlas' ? 'active' : '')} data-screen-label="03 Quote Atlas">
+        <div className="inner-panel">
+          <ViewC data={data} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+async function loadData() {
+  const [agg, raw] = await Promise.all([
+    fetch('./data/agg.json').then(r => r.json()),
+    fetch('./data/survey.json').then(r => r.json()),
+  ]);
+  return { ...agg, raw };
+}
+
+loadData().then(data => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<App data={data} />);
+}).catch(err => {
+  document.getElementById('root').innerHTML = '<div style="padding:40px;font-family:monospace;color:#1a1a1a;background:#f4ede0;">Failed to load data: ' + err.message + '</div>';
+  console.error(err);
+});
+</script>
+
+</body>
+</html>
